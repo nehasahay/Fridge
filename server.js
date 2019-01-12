@@ -1,3 +1,4 @@
+require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
 
@@ -19,22 +20,31 @@ app.use(express.urlencoded({
 app.use(express.json());
 
 // Set Handlebars.
-app.engine("handlebars", exphbs({
-    defaultLayout: "main"
+app.engine(".hbs", exphbs({
+    "defaultLayout": "main",
+    "extname"      : ".hbs"
 }));
-app.set("view engine", "handlebars");
+
+app.set("view engine", ".hbs");
 
 
 // Routes
 // =============================================================
-require("./routes/html-routes.js")(app);
+require("./routes/htmlRoutes")(app);
+require("./routes/recipeApiRoutes")(app);
+require("./routes/userApiRoutes")(app);
+
+var syncOptions = { force: false };
+if (process.env.NODE_ENV === "test") {
+    syncOptions.force = true;
+  }
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({
-    force: false
-}).then(function () {
+db.sequelize.sync(syncOptions).then(function () {
     app.listen(PORT, function () {
         console.log("App listening on PORT " + PORT);
     });
 });
+
+module.exports = app;
