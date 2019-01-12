@@ -15,8 +15,8 @@ create table recipes
 {
     id int not null auto_increment,
     userid int not null,
-    receipe_url varchar(1024) not null,
-    wine_pairing varchar(1024),
+    uri_recipe varchar(1024) not null,
+    uri_wine varchar(1024) not null,
     isFavorite boolean default false,
     primary key(id),
     foreign key (userid) references user(id) 
