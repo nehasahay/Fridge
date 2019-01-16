@@ -11,7 +11,6 @@ module.exports = function (app) {
     return (uuid && regex.test(uuid));
   }
 
-
   app.post("/signup", (req, res) => {
     // Salt and hash the user's password
     bcrypt.hash(req.body.password, saltRounds, (error, value) => {
@@ -26,7 +25,6 @@ module.exports = function (app) {
       });
     });
   });
-
 
   app.post("/login", (req, res) => {
     // Find the user's hash
@@ -110,8 +108,8 @@ module.exports = function (app) {
               User.update({
                 password
               }, {
-                "where": {
-                  "id": req.params.id
+                where: {
+                  id: req.params.id
                 }
               });
             });
