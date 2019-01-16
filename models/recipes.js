@@ -30,13 +30,12 @@ module.exports = function (sequelize, DataTypes) {
         freezeTableName: true,
         timestamps: false
     });
-    Recipes.associate = function (models) {
-        Recipes.belongsTo(models.User, {
-            foreignKey: {
-                allowNull: false
-            }
-        });
-    };
+
+    // Recipes.associate = function (models) {
+    //     Recipes.belongsTo(models.User, {
+    //         "onDelete": "CASCADE"
+    //     });
+    // };
 
     return Recipes;
 };

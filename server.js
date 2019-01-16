@@ -1,5 +1,6 @@
 require("dotenv").config();
 var express = require("express");
+const path = require("path");
 var exphbs = require("express-handlebars");
 
 // Sets up the Express App
@@ -11,7 +12,7 @@ var PORT = process.env.PORT || 8080;
 app.use(express.static("public"));
 
 // Requiring our models for syncing
-var db = require("./models");
+const db = require(path.join(__dirname, "models"));
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({
@@ -30,9 +31,9 @@ app.set("view engine", ".hbs");
 
 // Routes
 // =============================================================
-require("./routes/htmlRoutes")(app);
-require("./routes/recipeApiRoutes")(app);
-require("./routes/userApiRoutes")(app);
+// require("./routes/htmlRoutes")(app);
+// require("./routes/recipeApiRoutes")(app);
+// require("./routes/userApiRoutes")(app);
 
 var syncOptions = {
     force: false
