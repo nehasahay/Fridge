@@ -1,6 +1,9 @@
 // html routes
 // var db = require("../models");
-var pug = require("pug");
+const pug = require("pug");
+const recipe = pug.compileFile("./views/recipe.pug");
+const user = pug.compileFile("./views/user.pug");
+
 
 module.exports = app => {
   // Load index page
@@ -26,6 +29,9 @@ module.exports = app => {
     //     example: dbExample
     //   });
     // });
+    res.send(recipe({
+        // insert data stuff here, e.g. ingredients
+    }));
   });
 
   app.get("/user/:id", (req, res) => {
@@ -34,6 +40,9 @@ module.exports = app => {
     //     example: dbExample
     //   });
     // });
+    res.send(user({
+        // insert data stuff here, i.e. user profile
+    }));
   });
 
   // Render 404 page for any unmatched routes
