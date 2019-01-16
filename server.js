@@ -21,8 +21,8 @@ app.use(express.json());
 
 // Set Handlebars.
 app.engine(".hbs", exphbs({
-    "defaultLayout": "main",
-    "extname"      : ".hbs"
+    "defaultLayout": process.env.HBS_DEFAULT_LAYOUT,
+    "extname": ".hbs"
 }));
 
 app.set("view engine", ".hbs");
@@ -34,10 +34,12 @@ require("./routes/htmlRoutes")(app);
 require("./routes/recipeApiRoutes")(app);
 require("./routes/userApiRoutes")(app);
 
-var syncOptions = { force: false };
+var syncOptions = {
+    force: false
+};
 if (process.env.NODE_ENV === "test") {
     syncOptions.force = true;
-  }
+}
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
