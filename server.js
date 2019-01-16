@@ -1,7 +1,7 @@
 require("dotenv").config();
 var express = require("express");
 const path = require("path");
-var exphbs = require("express-handlebars");
+// var exphbs = require("express-handlebars");
 
 // Sets up the Express App
 // =============================================================
@@ -20,13 +20,15 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 
-// Set Handlebars.
-app.engine(".hbs", exphbs({
-    "defaultLayout": process.env.HBS_DEFAULT_LAYOUT,
-    "extname": ".hbs"
-}));
+// // Set Handlebars.
+// app.engine(".hbs", exphbs({
+//     "defaultLayout": "main",
+//     "extname"      : ".hbs"
+// }));
 
-app.set("view engine", ".hbs");
+// app.set("view engine", ".hbs");
+
+app.set("view engine", "pug");
 
 
 // Routes
@@ -35,12 +37,10 @@ app.set("view engine", ".hbs");
 // require("./routes/recipeApiRoutes")(app);
 // require("./routes/userApiRoutes")(app);
 
-var syncOptions = {
-    force: false
-};
-if (process.env.NODE_ENV === "test") {
-    syncOptions.force = true;
-}
+// var syncOptions = { force: false };
+// if (process.env.NODE_ENV === "test") {
+//     syncOptions.force = true;
+//   }
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
