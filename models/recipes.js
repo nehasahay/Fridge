@@ -1,18 +1,25 @@
 /* eslint-disable camelcase */
 module.exports = function (sequelize, DataTypes) {
     var Recipes = sequelize.define("Recipes", {
-        recipe_url: {
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            allowNull: false,
+            primaryKey: true
+        },
+        uri_recipe: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 len: [1, 1024]
             }
         },
-        wine_pairing: {
+        uri_wine: {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
-                len: [1, 1024]
+                len: [1, 1024],
+                isURL: true
             }
         },
         isFavorite: {

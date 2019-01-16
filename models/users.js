@@ -1,25 +1,40 @@
 /* eslint-disable camelcase */
+const bcrypt = require("bcrypt");
 module.exports = function (sequelize, DataTypes) {
     var User = sequelize.define("Users", {
-        first_name: {
-            type: DataTypes.STRING,
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             allowNull: false,
-            validate: {
-                len: [1, 50]
-            }
+            primaryKey: true
         },
-        last_name: {
+        fullname: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1, 50]
+                is: {
+                    args: /^[a-z\s-']+$/i,
+                    msg: "Only letters, spaces, hyphens, and apostrophes are allowed."
+                },
+                len: {
+                    args: [1, 100],
+                    msg: "Your name cannot exceed 100 characters."
+                }
             }
         },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
             validate: {
-                len: [1, 255]
+                isEmail: {
+                    args: true,
+                    msg : "Please enter a valid email."
+                },
+                len: {
+                    args: [1, 75],
+                    msg: "Your email cannot exceed 75 characters."
+                }
             }
         },
         password: {
@@ -30,8 +45,17 @@ module.exports = function (sequelize, DataTypes) {
             }
         }
     }, {
-        freezeTableName: true
+        freezeTableName: true,
+        instanceMethods: {
+            generateHash(password) {
+                return bcrypt.hash(password, bcrypt.genSaltSync(8));
+            },
+            validPassword(password) {
+                return bcrypt.compare(password, this.password);
+            }
+        }
     });
+
     User.associate = function (models) {
         User.hasMany(models.Recipes, {
             onDelete: "cascade"
