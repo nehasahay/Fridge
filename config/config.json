@@ -1,12 +1,12 @@
 {
   "development": {
-    "use_env_variable": "JAWSDB_URL",
+    "use_env_variable": "DB_URL",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": null,
-    "database": "mai_db",
+    "database": "recipe_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
