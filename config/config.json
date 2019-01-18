@@ -1,20 +1,12 @@
 {
   "development": {
-<<<<<<< HEAD
-    "use_env_variable": "LOCAL_URL",
-=======
     "use_env_variable": "DB_URL",
->>>>>>> origin
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": null,
-<<<<<<< HEAD
-    "database": "database_test",
-=======
     "database": "recipe_db",
->>>>>>> origin
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
