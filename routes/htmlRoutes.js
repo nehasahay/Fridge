@@ -45,6 +45,9 @@ module.exports = app => {
     }));
   });
 
+  app.get("/search", (req, res) => {
+      res.send(pug.renderFile("./views/search.pug"));
+  })
   // Render 404 page for any unmatched routes
   app.get("*", (req, res) => {
     // pug.renderFile("404");
