@@ -144,7 +144,7 @@ function loadcards() {
 }
 
 // flag favorite then sort by favorite (FE)
-function updatefavorite() {
+function setfavorite() {
 
     connection.query("UPDATE recipes SET isFavorite = 'true' WHERE ? = userid AND id = ?", [bcrypt.user.id], [card.button.id], function (err, result) {
         if (err) {}
@@ -152,11 +152,37 @@ function updatefavorite() {
 }
 
 // unflag favorite the sort by favorite (FE)
-function updatefavorite() {
+function resetfavorite() {
 
-    connection.query("UPDATE recipes SET isFavorite = 'false' WHERE ? = userid AND id = ?", [bcrypt.user.id], [card.button.id], function (err, result) {
+    connection.query("UPDATE recipes SET isFavorite = 'false' WHERE ? = userid AND id = ?", [bcrypt.user.id], [fav.button.id], function (err, result) {
         if (err) {}
     });
 }
 
+// delete recipies
 
+function deleterecipes() {
+
+    connection.query("DELETE * FROM recipes WHERE userid = ? and ?", [bcrypt.user.id], [fav.button.id], function (err, result) {
+        if (err) {}
+
+    });
+}
+
+// delete users
+
+function deleteuser() {
+
+    connection.query("DELETE FROM users AS a INNER JOIN recipe AS b ON a.userid = b.userid WHERE a.userid = ?", [bcrypt.user.id], [deleteme.button.id], function (err, result) {
+        if (err) {}
+      
+    });
+}
+
+// function deleteuser() {
+
+//     connection.query("DELETE FROM users AS a INNER JOIN recipe AS b ON a.userid = b.userid WHERE a.userid = ?", [bcrypt.user.id], [deleteme.button.id], function (err, result) {
+//         if (err) {}
+      
+//     });
+// }
