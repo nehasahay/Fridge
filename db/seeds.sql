@@ -12,17 +12,5 @@ INSERT INTO recipes (userid, uri_recipe, uri_wine, isFavorite) VALUES ('1', 'htt
 INSERT INTO recipes (userid, uri_recipe, uri_wine, isFavorite) VALUES ('2', 'https://api.edamam.com/search?q=3b53c9a0508d5f707a0dfd525f1e4412&app_id=9550365e&app_key=62b808ba14bc95262bab3c0876be2412', 'http://api.snooth.com/wines/?q=bel-lago-semi-dry-reisling&akey=5pgy0fabib7s89ky9l5fx24ha754svspwnata652tn7gdr71&s=sr', '1');
 INSERT INTO recipes (userid, uri_recipe, uri_wine, isFavorite) VALUES ('3', 'https://api.edamam.com/search?q=3f0ce55d11f4a075bb39c2091e59e261&app_id=9550365e&app_key=62b808ba14bc95262bab3c0876be2412', 'http://api.snooth.com/wines/?q=blush-pinot-grigio-delle-venezie-folonari-2011&akey=5pgy0fabib7s89ky9l5fx24ha754svspwnata652tn7gdr71&s=sr', '1');
 
-INSERT INTO winetypes (wine_id, wine_type) VALUES ('0', 'Red Wine');
-INSERT INTO winetypes (wine_id, wine_type) VALUES ('1', 'Red Wine');
-INSERT INTO winetypes (wine_id, wine_type) VALUES ('2', 'Red Wine');
-INSERT INTO winetypes (wine_id, wine_type) VALUES ('3', 'Red Wine');
-INSERT INTO winetypes (wine_id, wine_type) VALUES ('3', 'Red Wine');
-INSERT INTO winetypes (wine_id, wine_type) VALUES ('4', 'Red Wine');
-INSERT INTO winetypes (wine_id, wine_type) VALUES ('5', 'Red Wine');
-INSERT INTO winetypes (wine_id, wine_type) VALUES ('6', 'Red Wine');
-INSERT INTO winetypes (wine_id, wine_type) VALUES ('7', 'Red Wine');
-INSERT INTO winetypes (wine_id, wine_type) VALUES ('8', 'Red Wine');
-INSERT INTO winetypes (wine_id, wine_type) VALUES ('9', 'Red Wine');
-
 
 

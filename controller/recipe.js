@@ -62,6 +62,8 @@ function findrecipe() {
 // SELECT tbl_users.ID, tbl_users.first_name, tbl_users.last_name, tbl_recipes.recipe_uri, tbl_recipes.wine_uri
 // FROM tbl_users INNER JOIN tbl_recipes ON tbl_users.ID = tbl_recipes.userid;
 
+// bacon, rice, cheese
+
 //recipes
 
 // var eda_recipe_title []
@@ -70,9 +72,10 @@ function findrecipe() {
 
 //wines
 
-// var snooth_title []
-// var snooth_img []
+// var wine_title []
+// var wine_img []
 // var wine_link []
+
 
 // for (var i = 0; i < dbrecipeextract.length; i++)
 // build each card
