@@ -20,7 +20,7 @@ const AM_APP_KEY
 const WN_A_KEY
 
 // TEST RECIPES
-const userrecipes = ["eggs", "bacon"]
+const useringredients = ["eggs", "bacon"]
 
 // RECIPES
 var userid
@@ -47,7 +47,7 @@ function fetchrecipes() {
 
     $.ajax({
             type: "GET",
-            url: "https://api.edamam.com/search?q=" + userrecipe[i] + "&app_id=" + AM_APP_ID + "&app_key=" + AM_APP_KEY,
+            url: "https://api.edamam.com/search?q=" + useringredients[i] + "&app_id=" + AM_APP_ID + "&app_key=" + AM_APP_KEY,
             dataType: "json"
         })
         .done(function (response) {
@@ -64,7 +64,7 @@ function fetchrecipes() {
 // compare recipes to wine types
 
 function fetchtypes() {
-    connection.query("SELECT * FROM pairing WHERE ? = ?", [userrecipe.len[i]], [recipe], function (err, result) {
+    connection.query("SELECT * FROM pairing WHERE ? = ?", [useringredients.len[i]], [ingredient], function (err, result) {
         if (err) {}
         winetypes.push(res[i].wine_type)
         res.json({
@@ -146,7 +146,7 @@ function loadcards() {
 // flag favorite then sort by favorite (FE)
 function updatefavorite() {
 
-    connection.query("UPDATE recipes SET isFavorite SET true WHERE ? = userid", [bcrypt.user.id], function (err, result) {
+    connection.query("UPDATE recipes SET isFavorite = 'true' WHERE ? = userid AND id = ?", [bcrypt.user.id], [card.button.id], function (err, result) {
         if (err) {}
     });
 }
@@ -154,7 +154,7 @@ function updatefavorite() {
 // unflag favorite the sort by favorite (FE)
 function updatefavorite() {
 
-    connection.query("UPDATE recipes SET isFavorite SET false WHERE ? = userid", [bcrypt.user.id], function (err, result) {
+    connection.query("UPDATE recipes SET isFavorite = 'false' WHERE ? = userid AND id = ?", [bcrypt.user.id], [card.button.id], function (err, result) {
         if (err) {}
     });
 }

@@ -29,7 +29,7 @@ create table recipes
 create table pairing
 {
     id int not null auto_increment,
-    food_type varchar(50) not null,
+    ingredient varchar(50) not null,
     wine_type varchar(50) not null,
     primary key(id)
 }
