@@ -31,11 +31,11 @@ module.exports = function (sequelize, DataTypes) {
         timestamps: false
     });
 
-    // Recipes.associate = function (models) {
-    //     Recipes.belongsTo(models.User, {
-    //         "onDelete": "CASCADE"
-    //     });
-    // };
+    Recipes.associate = function (models) {
+        Recipes.belongsTo(models.Users, {
+            "onDelete": "CASCADE"
+        });
+    };
 
     return Recipes;
 };
