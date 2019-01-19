@@ -1,81 +1,145 @@
-//find recipes
-//recipe app_id ='9550365e'
-//recipe app_key ='62b808ba14bc95262bab3c0876be2412'
-//wine akey ='5pgy0fabib7s89ky9l5fx24ha754svspwnata652tn7gdr71'
+// Recipe Controller
+// Steps
+// 1. Send user recipes (deliminated by spaces) to controller
+// 2. recipes are split into individual search terms are executed against the API stack starting with the public API (Edamame)
+// 3. For each recipe passed the following happens
+//     a. recipe is passed to recipe API (EDAMAME)
+//     b. results of edamame (recipe_uri, recipe_label, recipe_img, ... n) is stored as array
+//     c. recipe is passed to pairing db
+//     d. result of the pairing db (wine_type) is then pass to wine API (SNOOTH)
+//     e. results of the wine API (wine_uri, wine_label, wine_img ... n) is stored as array
+//     f. results for each search (edamame, wine) are combined and sent as object back to be created as a card
+// 4. If the use saves the recipe ONLY the recipe_uri, and wine_uri are saved to the database
+// 5. when the user logs in the page is loaded another api will read the db and retrieve the recipe_uri, and wine_uri(s) for the user
+// 6. another API will decompile the uri as JSON and re-create the "card" object to be sent to the FE as a list of users saved cards
+// 7. A favorite flag is included. if the user selects on favorite the db record is flagged and sorted to the top
+// KEYS
 
-//psuedo-code
+const AM_APP_ID
+const AM_APP_KEY
+const WN_A_KEY
 
-function findrecipe() {
+// TEST RECIPES
+const userrecipes = ["eggs", "bacon"]
 
-  var winetype;
-  var wineresults;
-  var ingredient = $(this).attr("recipe-name");
-  var recipeURL = "https://api.edamam.com/search?q=" + ingredient + "&app_id=" + APP_ID + "&app_key" + APPKEY;
-  var wineURL = "//api.snooth.com/wines/?q=" + winetype + "&akey=" + A_KEY + "&s=ser"
-  var useringredients = str.split(" ");
+// RECIPES
+var userid
+var recipe_label = []
+var recipe_image = []
+var recipe_uri = []
 
-  // edaman results
+// PAIRING
+var winetypes = []
 
-  var eda_recipeurl[]
-  var snooth_wineurl[]
+// WINES
+var wine_label = []
+var wine_img = []
+var wine_uri = []
 
-  // for every ingredient, find a recipe and wine
-  // where there is no match for wine "no pairing could be found"
-  // pairing is 1:1
+// SAVED
+var saved_recipes = []
 
-  for (var i = 0; i < useringredients.length; i++) { // max 3
+// CARDS
+var saved_recipes = []
 
-      $.ajax({
-          url: recipeURL,
-          method: "GET"
-      }).done(function (response) {
-          var reciperesults = response.data;
+// fetch recipes
+function fetchrecipes() {
 
-          for (var i = 0; i < reciperesults.length; i++) {
-              push eda_recipeurl("url");
+    $.ajax({
+            type: "GET",
+            url: "https://api.edamam.com/search?q=" + userrecipe[i] + "&app_id=" + AM_APP_ID + "&app_key=" + AM_APP_KEY,
+            dataType: "json"
+        })
+        .done(function (response) {
+            console.log(response)
+            for (var i = 0; i < 3; i++) {
 
-              // compare to pairing table
-              // if reciperesult = food_type from pairing tbl
-              // then return winetype (wine_type).. to be used in subsequey ajax call
-              // if none then "there is no matching wine"
+                recipe_label.push(response.hits[i].recipe.label)
+                recipe_image.push(response.hits[i].recipe.image)
+                recipe_uri.push(response.hits[i].recipe.uri)
+            }
+        })
+}
 
-              $.ajax({
-                  url: wineURL,
-                  method: "GET"
-              }).done(function (response) {
-                  wineresults = response.data;
+// compare recipes to wine types
 
-                  for (var i = 0; i < wineresults.length; i++) {
+function fetchtypes() {
+    connection.query("SELECT * FROM pairing WHERE ? = ?", [userrecipe.len[i]], [recipe], function (err, result) {
+        if (err) {}
+        winetypes.push(res[i].wine_type)
+        res.json({
+            id: result
+        });
+    });
 
-                      push snooth_wineurl("wineurl");
+}
 
-                  };
-              };
-          }
+// fetch wine types from matched recipes
 
-  
-};
+function fetchwines() {
 
+    $.ajax({
+            type: "GET",
+            url: "http://api.snooth.com/wines/?q=" + wine_type[i] + "&akey=" + WN_A_KEY + "&s=sr",
+            dataType: "json"
+        })
+        .done(function (response) {
+            console.log(response)
+            for (var z = 0; z < 3; z++) {
 
+                wine_label.push(response.wines[i].name)
+                wine_img.push(response.wines[i].image)
+                wine_uri.push(response.wines[i].link)
+            }
+        })
+}
 
-// function to deconstruct recipe and wine uri by user
-// SELECT tbl_users.ID, tbl_users.first_name, tbl_users.last_name, tbl_recipes.recipe_uri, tbl_recipes.wine_uri
-// FROM tbl_users INNER JOIN tbl_recipes ON tbl_users.ID = tbl_recipes.userid;
+// save recipes. uri only. why store anything else -- low overhead. we will build the cards leveraging the uri's
 
-// bacon, rice, cheese
+function saverecipes() {
 
-//recipes
+    connection.query("UPDATE * pairing SET ?, ?", [recipe_uri.len[i]], [wine_uri.len], function (err, result) {
 
-// var eda_recipe_title []
-// var eda_image []
-// var recipe_link []
+        if (err) {}
+    });
+}
 
-//wines
+// load recipes. uri only. we will pull the required objects from the uri via a deconstructor api
 
-// var wine_title []
-// var wine_img []
-// var wine_link []
+function loadrecipes() {
 
+    connection.query("SELECT * FROM recipes userid = ?", [bcrypt.user.id], function (err, result) {
+        if (err) {}
 
-// for (var i = 0; i < dbrecipeextract.length; i++)
-// build each card
+        saved_recipes.push(res[i].recipe_uri + " " + res[i].wine_uri)
+
+    });
+
+}
+
+// now we build the cards and pass it back to the FE copleted 
+
+function loadcards() {
+
+    $.ajax({
+        type: "GET",
+        url: "/cards/",
+        dataType: "json"
+    })
+    .done(function (response) {
+        console.log(response)
+        for (var i = 0; i < 3; i++) {
+            
+            var card = [
+            saved_recipes.recipe_uri,
+            saved_recipes.recipe_label,
+            saved_recipes.recipe_img,
+            saved_recipes.wine_label,
+            saved_recipes.wine_img 
+            ]
+            card
+        }
+    })
+
+}
+
