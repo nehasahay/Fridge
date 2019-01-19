@@ -1,7 +1,7 @@
 // html routes
 // var db = require("../models");
 const pug = require("pug"),
-    index = pug.compileFile("./views/index.pug"),
+    // index = pug.compileFile("./views/index.pug"),
     recipe = pug.compileFile("./views/recipe.pug"),
     user = pug.compileFile("./views/user.pug"),
     login = pug.compileFile("./views/login.pug"),
@@ -14,7 +14,8 @@ module.exports = app => {
         // if (!req.user) {
         //     res.redirect("/login");
         // };
-        res.send(index({}));
+        // res.send(index({}));
+        res.render("index");
     });
 
     // Load example page and pass in an example by id
