@@ -169,7 +169,7 @@ function deleterecipes() {
     });
 }
 
-// delete user
+// delete users
 
 function deleteuser() {
 
@@ -178,3 +178,11 @@ function deleteuser() {
       
     });
 }
+
+// function deleteuser() {
+
+//     connection.query("DELETE FROM users AS a INNER JOIN recipe AS b ON a.userid = b.userid WHERE a.userid = ?", [bcrypt.user.id], [deleteme.button.id], function (err, result) {
+//         if (err) {}
+      
+//     });
+// }
