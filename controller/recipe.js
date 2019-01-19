@@ -143,3 +143,20 @@ function loadcards() {
 
 }
 
+// flag favorite then sort by favorite (FE)
+function updatefavorite() {
+
+    connection.query("UPDATE recipes SET isFavorite SET true WHERE ? = userid", [bcrypt.user.id], function (err, result) {
+        if (err) {}
+    });
+}
+
+// unflag favorite the sort by favorite (FE)
+function updatefavorite() {
+
+    connection.query("UPDATE recipes SET isFavorite SET false WHERE ? = userid", [bcrypt.user.id], function (err, result) {
+        if (err) {}
+    });
+}
+
+
