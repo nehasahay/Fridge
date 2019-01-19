@@ -29,7 +29,7 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 isEmail: {
                     args: true,
-                    msg : "Please enter a valid email."
+                    msg: "Please enter a valid email."
                 },
                 len: {
                     args: [1, 75],
@@ -57,9 +57,7 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     User.associate = function (models) {
-        User.hasMany(models.Recipes, {
-            onDelete: "cascade"
-        });
+        User.hasMany(models.Recipes);
     };
 
     return User;
