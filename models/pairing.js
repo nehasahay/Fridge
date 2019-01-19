@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 module.exports = function (sequelize, DataTypes) {
     var Pairings = sequelize.define("Pairings", {
-        food_type: {
+        ingredient: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {

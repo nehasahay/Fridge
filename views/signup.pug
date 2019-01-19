@@ -1,20 +1,28 @@
 extends layout
-
+block scripts
+  script(src="./public/js/signup.js")
 block content
-    h1 Register
-    form#register(method="POST", action="/users/register")
-        #form-group
-            label Name:
-            input.form-control(name="name", type="text")
-        #form-group
-            label Email:
-            input.form-control(name="email", type="text")
-        #form-group
-            label Password:
-            input.form-control(name="password",type="password")
-        #form-group
-            label Confirm:
-            input.form-control(name="password2",type="password")
-        br
-        input.btn.btn-primary(type="submit",value="Submit")
+  .main.container.row
+    .col-md-6.col-md-offset-3
+      h1.display-4.m-b-2 Sign Up
+      
+      // register form
+      form.signup()
+        div.form-group
+          label(for='name') Name:
+          input#name.form-control(type='text', placeholder='first and last' name='name')
+        div.form-group
+          label(for='email') Email:
+          input#email.form-control(type='email', placeholder='name@email.com' name='email')
+        div.form-group
+          label(for='pw') Password:
+          input#pw.form-control(type='password' name='password')
+        div.form-group
+          label(for='pw2') Confirm Password:
+          input#pw2.form-control(type='password' name='confirmPassword')
+        div(style='display: none' id='alert' class='alert alert-danger' role='alert')
+            span(class='glyphicon glyphicon-exclamation-sign' aria-hidden='true')
+            span(class='sr-only')Error: 
+            span(class='msg')
+        button.btn.btn-primary(type='submit') Sign up
     a(href="/login") Already registered? Click here!

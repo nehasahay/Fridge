@@ -1,6 +1,8 @@
 require("dotenv").config();
 var express = require("express");
 const path = require("path");
+var session = require("express-session");
+var passport = require("./config/passport");
 
 // Sets up the Express App
 // =============================================================
@@ -20,6 +22,10 @@ app.use(express.urlencoded({
 app.use(express.json());
 
 app.set("view engine", "pug");
+// We need to use sessions to keep track of our user's login status
+app.use(session({ secret: "groceries", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // Routes
@@ -37,7 +43,7 @@ if (process.env.NODE_ENV === "test") {
 // =============================================================
 db.sequelize.sync(syncOptions).then(function () {
     app.listen(PORT, function () {
-        console.log("App listening on PORT " + PORT);
+        console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
     });
 });
 
