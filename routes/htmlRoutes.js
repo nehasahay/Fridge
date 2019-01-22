@@ -1,5 +1,6 @@
 // html routes
 // var db = require("../models");
+const sendInfo = require("../controller/recipeControllerStuff.js");
 const pug = require("pug"),
     // index = pug.compileFile("./views/index.pug"),
     recipe = pug.compileFile("./views/recipe.pug"),
@@ -22,7 +23,12 @@ module.exports = app => {
     app.get("/recipe/:id", (req, res) => {
         res.send(recipe({
             // insert data stuff here, e.g. ingredients
+            stuff: JSON.stringify(sendInfo)
         }));
+    });
+
+    app.get("/search", (req, res) => {
+        res.render("search");
     });
 
     app.get("/user/:id", (req, res) => {

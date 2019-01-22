@@ -4,8 +4,13 @@ extends layout
 //-     script(src="./public/js/index.js")
 
 block content
-    header
-        h1.blue-text.text-lighten-1 Recipes
+    form(action="/search" method="GET")
+        .row
+            .input-field.col.s12
+                input#searchInput(type="search")
+                label(for="searchInput") Search
+                button.btn(type="submit")
+                    i.material-icons search
     .row
         .col.s12.m6
             .card.medium
