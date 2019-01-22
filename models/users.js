@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 const bcrypt = require("bcrypt-nodejs");
 module.exports = function (sequelize, DataTypes) {
-    var User = sequelize.define("Users", {
+    var Users = sequelize.define("Users", {
         fullname: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -42,17 +42,17 @@ module.exports = function (sequelize, DataTypes) {
         freezeTableName: true
     });
 
-    User.prototype.validPassword = function (password) {
+    Users.prototype.validPassword = function (password) {
         return bcrypt.compareSync(password, this.password);
     };
 
-    User.hook("beforeCreate", function (user) {
+    Users.hook("beforeCreate", function (user) {
         user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
     });
 
-    User.associate = function (models) {
-        User.hasMany(models.Recipes);
+    Users.associate = function (models) {
+        Users.hasMany(models.Recipes);
     };
 
-    return User;
+    return Users;
 };
