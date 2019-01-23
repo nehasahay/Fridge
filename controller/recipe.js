@@ -61,7 +61,7 @@ function fetchrecipes() {
         })
 }
 
-// compare recipes to wine types
+// compare recipes to wine types 
 
 function fetchtypes() {
     connection.query("SELECT * FROM pairing WHERE ? = ?", [useringredients.len[i]], [ingredient], function (err, result) {
