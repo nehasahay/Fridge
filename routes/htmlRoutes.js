@@ -32,7 +32,7 @@ module.exports = app => {
 
     app.get("/search", (req, res) => {
         console.log(req.query.recipeSearch);
-        const recipe = req.query.recipeSearch.split(' ')[0]
+        const recipe = req.query.recipeSearch.split(',')[0]
 
         db.Pairings.findOne({
             where: {
