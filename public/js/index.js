@@ -1,5 +1,5 @@
-$(document).ready(function () {
-  $.get("/api/user_data").then((data) => {
-    $(".member-name").text(data.fullname);
-  });
-});
+// $(document).ready(function () {
+  // $.get("/api/user_data").then((data) => {
+  //   $(".member-name").text(data.fullname);
+  // });
+// });
