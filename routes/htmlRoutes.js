@@ -40,19 +40,10 @@ module.exports = app => {
                 }
             })
             .then(function (response) {
-                // if (response.data.hits.length > 0) {
-                //     for (recipe of response.data.hits) {
-                //         console.log(recipe.recipe);
-                //     };
-                // };
-                // console.log(response.data.hits);
-                // pug.renderFile("./views/search.pug", {recipes: response.data.hits.length})
-                console.log(response.data.hits);
-                console.log(response.data.hits.length);
+                res.render("search", {results: response.data.hits});
             }).catch(error => {
-                console.log(error)
+                console.log(error);
             });
-        res.render("search");
     });
 
     app.get("/user/:id", (req, res) => {
