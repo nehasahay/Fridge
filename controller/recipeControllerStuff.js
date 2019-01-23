@@ -1,6 +1,6 @@
 const axios = require("axios");
-mysql = require('mysql');
-var db = require("../models");
+// mysql = require('mysql');
+// var db = require("../models");
 
 // This is for a single recipe.
 // Use shareAs value. "shareAs": "http://www.edamam.com/recipe/serious-chocolate-easy-chocolate-pie-crust-recipe-3dc6d568c66a38e2f86d24a055c6de6d/-",
@@ -47,7 +47,7 @@ axios.get("https://api.edamam.com/search", {
         relevantInfo.recipe = response.data.source;
         relevantInfo.image = response.data.image;
         // console.log(relevantInfo);
-        relevantInfo.winepair = getwinepairs (response.data.label[5]);
+        // relevantInfo.winepair = getwinepairs (response.data.label[5]);
     })
     .catch(function (error) {
         console.log(error);
@@ -57,42 +57,42 @@ axios.get("https://api.edamam.com/search", {
 module.exports = relevantInfo;
 
 
-var getwinepairs = function(ingredient){
+// var getwinepairs = function(ingredient){
 
-        db.Pairings.findOne({
-            where: {
-                ingredient: ingredient
-            }
-        })
-.then(function(result) {
-    return res.json(result);
+//         db.Pairings.findOne({
+//             where: {
+//                 ingredient: ingredient
+//             }
+//         })
+// .then(function(result) {
+//     return res.json(result);
 
 
 
-    axios.get("https://api.edamam.com/search", {
-        params: {
-            "r": queryURL,
-            "app_id": app_id,
-            "app_key": app_key
-        }
-    })
-    .then(function (response) {
-        WineInfo.title = response.data.label;
-        WineInfo.image = response.data.image;
-        WineInfo.ingredients = response.data.ingredientLines;
+//     axios.get("https://api.edamam.com/search", {
+//         params: {
+//             "r": queryURL,
+//             "app_id": app_id,
+//             "app_key": app_key
+//         }
+//     })
+//     .then(function (response) {
+//         WineInfo.title = response.data.label;
+//         WineInfo.image = response.data.image;
+//         WineInfo.ingredients = response.data.ingredientLines;
         
-        // console.log(relevantInfo);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+//         // console.log(relevantInfo);
+//     })
+//     .catch(function (error) {
+//         console.log(error);
+//     });
 
 
 
 
 
-  });
+//   });
         
-};
+// };
 
 

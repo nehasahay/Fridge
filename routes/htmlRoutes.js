@@ -1,5 +1,5 @@
 // html routes
-// var db = require("../models");
+var db = require("../models");
 const sendInfo = require("../controller/recipeControllerStuff.js");
 const axios = require("axios");
 const app_id = process.env.APP_ID;
@@ -32,16 +32,54 @@ module.exports = app => {
 
     app.get("/search", (req, res) => {
         console.log(req.query.recipeSearch);
-        axios.get("https://api.edamam.com/search", {
+        const recipe = req.query.recipeSearch.split(' ')[0]
+
+        db.Pairings.findOne({
+            where: {
+              food_type: recipe
+            }
+          })
+          .then(function (response) {
+            console.log(response.wine_type);
+        
+            axios.get("http://api.snooth.com/wines/?", {
                 params: {
-                    "q": req.query.recipeSearch,
-                    "app_id": app_id,
-                    "app_key": app_key
+                  "akey": process.env.AKEY,
+                  "ip": req.connection.remoteAddress,
+                  "q": response.wine_type,
+                  "xp": process.env.XP,
+                  "n": process.env.N
+        
                 }
-            })
-            .then(function (response) {
-                res.render("search", {results: response.data.hits});
-            }).catch(error => {
+              })
+              .then(function (response) {
+                console.log(response.data.wines[0]);
+                // return (response.data.wines[0]);
+                let wineobject = response.data.wines[0]
+        
+                axios.get("https://api.edamam.com/search", {
+                    params: {
+                      "q": req.query.recipeSearch,
+                      "app_id": app_id,
+                      "app_key": app_key
+                    }
+                  })
+                  .then(function (response) {
+        
+        
+                    console.log(wineobject)
+                    res.render("search", {
+                      results: response.data.hits,
+                      wine: wineobject
+                    })
+        
+        
+        
+                  }).catch(error => {
+                    console.log(error);
+                  });
+              });
+          }).catch(error => {
                 console.log(error);
             });
     });
