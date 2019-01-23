@@ -1,13 +1,13 @@
 extends layout
 
-//- block scripts
-//-     script(src="./public/js/index.js")
+block scripts
+    script(src="./public/js/index.js")
 
 block content
     form(action="/search" method="GET")
         .row
             .input-field.col.s12
-                input#searchInput(type="search")
+                input#searchInput(type="search" name="recipeSearch")
                 label(for="searchInput") Search
                 button.btn(type="submit")
                     i.material-icons search

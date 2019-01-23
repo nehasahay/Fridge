@@ -1,7 +1,10 @@
 extends layout
 
 block content
-    p
-        | hello
+    p Hello
+    //- each recipe in #{recipes}
+    //-     h2= recipe.label
+    //- else
+    //-     h1 No recipes found!
 
 //- block scripts

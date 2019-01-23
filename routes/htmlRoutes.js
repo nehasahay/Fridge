@@ -1,6 +1,9 @@
 // html routes
 // var db = require("../models");
 const sendInfo = require("../controller/recipeControllerStuff.js");
+const axios = require("axios");
+const app_id = process.env.APP_ID;
+const app_key = process.env.APP_KEY;
 const pug = require("pug"),
     // index = pug.compileFile("./views/index.pug"),
     recipe = pug.compileFile("./views/recipe.pug"),
@@ -28,6 +31,27 @@ module.exports = app => {
     });
 
     app.get("/search", (req, res) => {
+        console.log(req.query.recipeSearch);
+        axios.get("https://api.edamam.com/search", {
+                params: {
+                    "q": req.query.recipeSearch,
+                    "app_id": app_id,
+                    "app_key": app_key
+                }
+            })
+            .then(function (response) {
+                // if (response.data.hits.length > 0) {
+                //     for (recipe of response.data.hits) {
+                //         console.log(recipe.recipe);
+                //     };
+                // };
+                // console.log(response.data.hits);
+                // pug.renderFile("./views/search.pug", {recipes: response.data.hits.length})
+                console.log(response.data.hits);
+                console.log(response.data.hits.length);
+            }).catch(error => {
+                console.log(error)
+            });
         res.render("search");
     });
 
@@ -38,7 +62,9 @@ module.exports = app => {
     });
 
     app.get("/login", (req, res) => {
-        res.send(login({}));
+        res.send(login({
+
+        }));
     });
 
     app.get("/signup", (req, res) => {
