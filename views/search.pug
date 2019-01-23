@@ -1,10 +1,26 @@
 extends layout
 
 block content
-    p Hello
-    //- each recipe in #{recipes}
-    //-     h2= recipe.label
-    //- else
-    //-     h1 No recipes found!
+    for item in results
+        .row
+            .col.s12.m6
+                .card
+                    .card-image.waves-effect.waves-block.waves-light
+                        img.activator(src= item.recipe.image)
+                    .card-content
+                        span.card-title.activator.grey-text.text-darken-4= item.recipe.label
+                            i.material-icons.right more_vert
+                            
+                    .card-reveal
+                        span.card-title.grey-text.text-darken-4= item.recipe.label
+                            i.material-icons.right close
+                        ul
+                            for ingredient in item.recipe.ingredientLines
+                                li= ingredient
+                        p
+                            | Find the recipe at 
+                            a(href=item.recipe.url)= item.recipe.source
+    else
+        h1 No recipes found!
 
 //- block scripts
