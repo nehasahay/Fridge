@@ -21,10 +21,10 @@ axios.get("https://api.edamam.com/search", {
     .then(function (response) {
         if (response.data.hits.length > 0) {
             for (recipe of response.data.hits) {
-                console.log(recipe.recipe);
+                // console.log(recipe.recipe);
             };
         };
-        console.log(response.data.hits.length);
+        // console.log(response.data.hits.length);
     });
 
 axios.get("https://api.edamam.com/search", {
@@ -43,7 +43,7 @@ axios.get("https://api.edamam.com/search", {
         relevantInfo.recipeURL = response.data.url;
         relevantInfo.recipe = response.data.source;
         relevantInfo.image = response.data.image;
-        console.log(relevantInfo);
+        // console.log(relevantInfo);
     })
     .catch(function (error) {
         console.log(error);
