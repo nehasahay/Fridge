@@ -2,6 +2,7 @@ extends layout
 
 block content
     for item in results
+        - var recipeID= item.recipe.uri.split("_")
         .row
             .col.s12.m6
                 .card
@@ -10,7 +11,8 @@ block content
                     .card-content
                         span.card-title.activator.grey-text.text-darken-4= item.recipe.label
                             i.material-icons.right more_vert
-                            
+                        button.btn(data-recipeID= recipeID[recipeID.length - 1])
+                            i.material-icons.center star
                     .card-reveal
                         span.card-title.grey-text.text-darken-4= item.recipe.label
                             i.material-icons.right close

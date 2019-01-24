@@ -22,14 +22,6 @@ module.exports = app => {
         res.render("index");
     });
 
-    // Load example page and pass in an example by id
-    app.get("/recipe/:id", (req, res) => {
-        res.send(recipe({
-            // insert data stuff here, e.g. ingredients
-            stuff: JSON.stringify(sendInfo)
-        }));
-    });
-
     app.get("/search", (req, res) => {
         console.log(req.query.recipeSearch);
         axios.get("https://api.edamam.com/search", {
@@ -44,12 +36,6 @@ module.exports = app => {
             }).catch(error => {
                 console.log(error);
             });
-    });
-
-    app.get("/user/:id", (req, res) => {
-        res.send(user({
-            // insert data stuff here, i.e. user profile
-        }));
     });
 
     app.get("/login", (req, res) => {
