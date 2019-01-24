@@ -1,17 +1,9 @@
 // html routes
 var db = require("../models");
-const sendInfo = require("../controller/recipeControllerStuff.js");
 const axios = require("axios");
 const path = require("path");
 const app_id = process.env.APP_ID;
 const app_key = process.env.APP_KEY;
-const pug = require("pug"),
-    // index = pug.compileFile("./views/index.pug"),
-    recipe = pug.compileFile("./views/recipe.pug"),
-    user = pug.compileFile("./views/user.pug");
-// login = pug.compileFile("./views/login.pug"),
-// signup = pug.compileFile("./views/signup.pug");
-
 
 module.exports = app => {
     // Load index page
@@ -24,8 +16,7 @@ module.exports = app => {
     });
 
     app.get("/search", (req, res) => {
-        // console.log(req.query.recipeSearch);
-        const recipe = req.query.recipeSearch.split(' ')[0]
+        const recipe = req.query.recipeSearch.split(',')[0]
 
         db.Pairings.findOne({
                 where: {
@@ -40,14 +31,12 @@ module.exports = app => {
                             "akey": process.env.AKEY,
                             "ip": req.connection.remoteAddress,
                             "q": response.wine_type,
-                            "xp": process.env.XP,
-                            "n": process.env.N
+                            "xp": 30,
+                            "n": 1
                         }
                     })
                     .then(function (response) {
-                        // console.log(response.data.wines[0]);
-                        // return (response.data.wines[0]);
-                        let wineobject = response.data.wines[0]
+                        const wineobject = response.data.wines[0];
 
                         axios.get("https://api.edamam.com/search", {
                                 params: {
@@ -57,11 +46,10 @@ module.exports = app => {
                                 }
                             })
                             .then(function (response) {
-                                // console.log(wineobject)
                                 res.render("search", {
                                     results: response.data.hits,
                                     wine: wineobject
-                                })
+                                });
                             }).catch(error => {
                                 console.log(error);
                             });
@@ -76,11 +64,11 @@ module.exports = app => {
         res.render("index");
     })
 
-    app.get("/user/:id", (req, res) => {
-        res.send(user({
-            // insert data stuff here, i.e. user profile
-        }));
-    });
+    // app.get("/user/:id", (req, res) => {
+    //     res.send(user({
+    //         // insert data stuff here, i.e. user profile
+    //     }));
+    // });
 
     app.get("/login", (req, res) => {
         res.sendFile(path.join(__dirname, "../public/html/login.html"));
