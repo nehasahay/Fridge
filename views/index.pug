@@ -6,22 +6,11 @@ block scripts
 block content
     form(action="/search" method="GET")
         .row
-            .input-field.col.s12
-                input#searchInput(type="search" name="recipeSearch")
-                label(for="searchInput") Search
-                button.btn(type="submit")
-                    i.material-icons search
-    .row
-        .col.s12.m6
-            .card.medium
-                .card-image.waves-effect.waves-block.waves-light
-                    img.activator(src="https://materializecss.com/images/office.jpg")
-                .card-content
-                    span.card-title.activator.grey-text.text-darken-4 Card Title
-                        i.material-icons.right more_vert
-                    p
-                        a(href="#") This is a link
-                .card-reveal
-                    span.card-title.grey-text.text-darken-4 Card Title
-                        i.material-icons.right close
-                    p Here is some more information about this product that is only revealed once clicked on.
+            .col.s11
+                .input-field
+                    input#searchInput(type="search" name="recipeSearch" placeholder="e.g., kale salad, bean soup, chocolate")
+                    label(for="searchInput") Search
+            .col.s1
+                .input-field
+                    button.btn.prefix.light-blue.lighten-1(type="submit")
+                        i.material-icons search
