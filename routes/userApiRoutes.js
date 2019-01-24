@@ -19,7 +19,7 @@ module.exports = function (app) {
       email: req.body.email,
       password: req.body.password
     }).then(function () {
-      res.redirect(307, "/login");
+      res.redirect("/");
     }).catch(function (err) {
       console.log(err);
       res.json(err);
