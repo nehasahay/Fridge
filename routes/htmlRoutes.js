@@ -1,6 +1,6 @@
 // html routes
 var db = require("../models");
-const sendInfo = require("../controller/recipeControllerStuff.js");
+// const sendInfo = require("../controller/recipeControllerStuff.js");
 const axios = require("axios");
 const app_id = process.env.APP_ID;
 const app_key = process.env.APP_KEY;

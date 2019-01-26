@@ -1,10 +1,16 @@
-# Project Title
+# What's In Your Fridge
 
-One Paragraph of project description goes here
+What’s in your fridge is an application where you can input the ingredients found in your fridge and you are provided with recipes for home fine dining. The application will (via recipe API) find recipes that encompass those ingredients with a visual of the dish on the side. You can save recipes under a category (breakfast, lunch, dinner) and recall it when logging in again. List can be retrieved to determine meals for that day. Meals are also paired up with the perfect wine (from wine API) 
+
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+- visit URL
+- git clone URL what's in your fridge
+- run sql DB
+- 
 
 ### Prerequisites
 
