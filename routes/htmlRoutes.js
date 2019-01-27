@@ -1,9 +1,5 @@
 // html routes
 var db = require("../models");
-<<<<<<< HEAD
-// const sendInfo = require("../controller/recipeControllerStuff.js");
-=======
->>>>>>> origin
 const axios = require("axios");
 const path = require("path");
 const app_id = process.env.APP_ID;
@@ -20,10 +16,6 @@ module.exports = app => {
     });
 
     app.get("/search", (req, res) => {
-<<<<<<< HEAD
-        console.log(req.query.recipeSearch);
-=======
->>>>>>> origin
         const recipe = req.query.recipeSearch.split(',')[0]
 
         db.Pairings.findOne({

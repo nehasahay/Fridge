@@ -1,48 +1,3 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-
-        <h2 align="center">WHAT'S IN YOUR FRIDGE</h2>
-        <h3 align="center">Nutruitional Chart Top 10 Fridge Food!</h3>
-
-<style>
-    body{
-        width:1060px;
-        margin:50px auto;
-    }
-    path {  stroke: #fff; }
-    path:hover {  opacity:0.9; }
-    rect:hover {  fill:blue; }
-    .axis {  font: 10px sans-serif; }
-    .legend tr{    border-bottom:1px solid grey; }
-    .legend tr:first-child{    border-top:1px solid grey; }
-    .axis path,
-    .axis line {
-        fill: none;
-        stroke: #000;
-        shape-rendering: crispEdges;
-    }
-    .x.axis path {  display: none; }
-    .legend{
-        margin-bottom:76px;
-        display:inline-block;
-        border-collapse: collapse;
-        border-spacing: 0px;
-    }
-    .legend td{
-        padding:4px 5px;
-        vertical-align:bottom;
-    }
-    .legendFreq, .legendPerc{
-        align:right;
-        width:50px;
-    }
-</style>
-<body>
-
-<div id='dashboard'>
-</div>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
     function dashboard(id, fData){
         var barColor = 'steelblue';
         function segColor(c){ return {fat:"#807dba", carbs:"#e08214",calories:"#41ab5d"}[c]; }
@@ -202,9 +157,10 @@
                 pC = pieChart(tF), // create the pie-chart.
                 leg= legend(tF);  // create the legend.
     }
-</script>
-<script>
-        
+
+// Localized JSON object of top 10 Ingredients
+// Future: sequelization
+
     var freqData=[
         {Ingredient:'Bacon',freq:{fat:12, carbs:0, calories:161}}
         ,{Ingredient:'Eggs',freq:{fat:5, carbs:1, calories:78}}
@@ -219,5 +175,3 @@
     ];
 
     dashboard('#dashboard',freqData);
-
-</script>
