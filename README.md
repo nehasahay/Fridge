@@ -29,7 +29,7 @@ What’s in your fridge is a simple application that exposes the joys of cooking
 
 ### What?! Not convinced? Queue in the video!
 
-[![What's in your fridge](https://imageshack.com/a/img922/6554/LrqEv6.gif)](https://github.com/nehasahay/Project2)
+[![What's in your fridge](http://imagizer.imageshack.us/a/img922/6554/LrqEv6.gif)](https://github.com/nehasahay/Project2)
 
 ### Github Repository
 
@@ -191,6 +191,7 @@ The following are the steps required for installing and configuring the totally 
 
 - Launch VSC IDE and run "npm i" to install the following packages
 
+```
 +-----------------+--------------------+-----------------------------+
 |     Package     |      Version       |           Purpose           |
 +-----------------+--------------------+-----------------------------+
@@ -208,6 +209,7 @@ The following are the steps required for installing and configuring the totally 
 | pug             | 2.0.3              | Application Scaffolding     |
 | sequelize       | 4.22.15            | SQL-Less DB Transactions    |
 +-----------------+--------------------+-----------------------------+
+```
 
 ###### Step 3: Create the user and pairing database
 
